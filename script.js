@@ -6,18 +6,19 @@ let equals = document.querySelector('.equals')
 let number1 = ""
 let number2 = ""
 let operator = ""
-let operatorCurrent = false
+let isOperatorInitial = false
+let isNumberCurrent = true
 let calculation = ""
 
 // When a number button is pressed, 
 for (n of numbers) {
     n.addEventListener('click', (e) => {
         // check if an operator has already been clicked
-        if (operatorCurrent === true) {
+        if (isNumberCurrent === true) {
             // if it has, change the display to just this number, 
             // clearing the previous display
             displayDiv.textContent = e.target.textContent
-            operatorCurrent = false
+            isNumberCurrent = false
         } else {
             // if it hasn't, keep adding the numbers to the
             // existing display
@@ -36,20 +37,20 @@ for (o of operators) {
         }
         // If this is the first time an operator is used
         // in a sequence of calculations
-        if (operatorCurrent === false) {
+        if (isOperatorInitial === false) {
             // then the operator variable becomes the button just clicked
             operator = e.target.textContent
-            operatorCurrent = true
+            isNumberCurrent = true
+            isOperatorInitial = true
+                // isOperatorInitial = true
                 // else if it is the 2nd or later time the operator
                 // is used
-        } else if (operator !== "") {
+        } else {
             operator = e.target.textContent
-            console.log(operator, number1, number2)
             calculation = Number(operate(operator, number1, number2))
-            console.log(calculation)
             displayDiv.textContent = calculation
             number1 = Number(displayDiv.textContent)
-            operatorCurrent = true
+            isNumberCurrent = true
         }
     })
 }
