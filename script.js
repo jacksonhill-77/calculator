@@ -4,12 +4,14 @@ let displayDiv = document.querySelector('.display-text')
 let clear = document.querySelector('.clear')
 let equals = document.querySelector('.equals')
 let backspace = document.getElementById('c')
+
 let number1 = ""
 let number2 = ""
 let operator = ""
 let isOperatorInitial = true
 let isNumberCurrent = true
 let calculation = ""
+let pressedEquals = false
 
 function roundNumber(num, dec) {
     return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
@@ -35,34 +37,39 @@ for (n of numbers) {
 
 for (o of operators) {
     o.addEventListener('click', (e) => {
-
-        // If no number has been entered yet
-        if (number1 === "") {
+        if (pressedEquals === true) {
             number1 = Number(displayDiv.textContent)
-        } else {
-            number2 = Number(displayDiv.textContent)
-        }
-        // If this is the first time an operator is used
-        // in a sequence of calculations
-        if (isOperatorInitial === true) {
-            // then the operator variable becomes the button just clicked
             operator = e.target.textContent
-            isNumberCurrent = true
-            isOperatorInitial = false
-
-            // or if it is the 2nd or later time an operator
-            // is used, do the following
+            pressedEquals = false
         } else {
-            let isOperatorDivision = e.target.textContent
-            if ((isOperatorDivision === '÷') && (number2 === '0')) {
-                calculation = 'c\'mon'
-                displayDiv.textContent = calculation
-            } else {
-                calculation = Number(operate(operator, number1, number2))
-                displayDiv.textContent = calculation
+            // If no number has been entered yet
+            if (number1 === "") {
                 number1 = Number(displayDiv.textContent)
-                isNumberCurrent = true
+            } else {
+                number2 = Number(displayDiv.textContent)
+            }
+            // If this is the first time an operator is used
+            // in a sequence of calculations
+            if (isOperatorInitial === true) {
+                // then the operator variable becomes the button just clicked
                 operator = e.target.textContent
+                isNumberCurrent = true
+                isOperatorInitial = false
+
+                // or if it is the 2nd or later time an operator
+                // is used, do the following
+            } else {
+                let isOperatorDivision = e.target.textContent
+                if ((isOperatorDivision === '÷') && (number2 === '0')) {
+                    calculation = 'c\'mon'
+                    displayDiv.textContent = calculation
+                } else {
+                    calculation = Number(operate(operator, number1, number2))
+                    displayDiv.textContent = calculation
+                    number1 = Number(displayDiv.textContent)
+                    isNumberCurrent = true
+                    operator = e.target.textContent
+                }
             }
         }
     })
@@ -81,8 +88,9 @@ clear.addEventListener('click', () => {
 equals.addEventListener('click', () => {
     number2 = displayDiv.textContent
     displayDiv.textContent = operate(operator, number1, number2)
-    number1 = displayDiv.textContent
     operator = ""
+    isNumberCurrent = true
+    pressedEquals = true
 })
 
 backspace.addEventListener('click', () => {
@@ -113,29 +121,23 @@ const multiply = function(...args) {
     }, 1);
 };
 
-const divide = function(...args) {
-    let numbers = Array.prototype.slice.call(arguments)
-    let flattened = numbers.reduce((prev, curr) => {
-        return prev.concat(curr)
-    }, [])
-    return flattened.reduce((total, number) => {
-        return total / number;
-    }, 1);
+const divide = function(number1, number2) {
+    return number1 / number2
 };
 
 const operate = function(operator, number1, number2) {
     number1 = Number(number1)
     number2 = Number(number2)
     if (operator === "+") {
-        return (roundNumber(add(number1, number2), 15))
+        return (roundNumber(add(number1, number2), 10))
     }
     if (operator === "-") {
-        return (roundNumber(subtract(number1, number2), 15))
+        return (roundNumber(subtract(number1, number2), 10))
     }
     if (operator === "x") {
-        return (roundNumber(multiply(number1, number2), 15))
+        return (roundNumber(multiply(number1, number2), 10))
     }
     if (operator === "÷") {
-        return (roundNumber(divide(number1, number2), 15))
+        return (roundNumber(divide(number1, number2), 10))
     }
 }

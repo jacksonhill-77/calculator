@@ -8,6 +8,9 @@
     font-weight: bolder;
 }
 
+
+/* ENTIRE CALCULATOR DIV */
+
 .calculator {
     padding: 30px;
     width: 350px;
@@ -24,12 +27,15 @@
 .display {
     display: flex;
     width: auto;
-    height: 100px;
+    height: 80px;
     justify-content: right;
     background-color: #F4AB41;
     border-radius: 25px 25px 0px 0px;
     padding: 15px;
 }
+
+
+/* CONTAINER FOR BUTTONS (DARK GREY DIV) */
 
 .button-container {
     display: grid;
@@ -47,10 +53,14 @@
     border-top-width: 0px;
 }
 
+
+/* BUTTON STYLES */
+
 .number,
 .operator,
 .equals,
 .clear,
+.point,
 #c {
     display: grid;
     width: 50px;
@@ -64,27 +74,13 @@
     border-style: solid;
     border-width: 3px;
     font-weight: bold;
+    box-shadow: 0px 3px 3px 3px #35393c;
 }
 
-.operator:hover,
-.clear:hover,
-#c:hover {
-    width: 55px;
-    height: 55px;
-    background-color: #f4ac4138;
-}
-
-.number {
+.operator {
+    background-color: #f4ac4119;
+    color: #F4AB41;
     border-color: #555A60;
-    background-color: #555A60;
-    color: white;
-}
-
-.number:hover {
-    width: 55px;
-    height: 55px;
-    border-color: #70777f;
-    background-color: #70777f;
 }
 
 .equals,
@@ -97,25 +93,66 @@
     height: 53px;
 }
 
+.equals {
+    grid-column: span 2;
+    width: 150px;
+}
+
+.number,
+.point {
+    border-color: #555A60;
+    background-color: #555A60;
+    color: white;
+}
+
+
+/* BUTTON HOVER STATES */
+
+.operator:hover,
+.clear:hover,
+#c:hover {
+    width: 55px;
+    height: 55px;
+    background-color: #f4ac4138;
+}
+
+.number:hover,
+.point:hover {
+    width: 55px;
+    height: 55px;
+    border-color: #70777f;
+    background-color: #70777f;
+}
+
 .equals:hover,
 .clear:hover,
 #c:hover {
     border-color: #ffffff;
 }
 
-.operator {
-    background-color: #f4ac4119;
-    color: #F4AB41;
-    border-color: #555A60;
-}
-
-.equals {
-    grid-column: span 2;
-    width: 150px;
-}
-
 .equals:hover {
     width: 158px;
     height: 56px;
     background-color: #f4ac4138;
+}
+
+
+/* BUTTON ACTIVE STATES */
+
+.operator:active {
+    border-color: #878f98;
+}
+
+.number:active,
+.operator:active,
+.equals:active,
+.clear:active,
+.point:active,
+#c:active {
+    margin-top: 5px;
+}
+
+.point:active,
+.number:active {
+    border-color: #878f98;
 }
