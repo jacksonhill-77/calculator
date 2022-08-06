@@ -61,6 +61,7 @@
 .equals,
 .clear,
 .point,
+.percent,
 #c {
     display: grid;
     width: 50px;
@@ -99,7 +100,8 @@
 }
 
 .number,
-.point {
+.point,
+.percent {
     border-color: #555A60;
     background-color: #555A60;
     color: white;
@@ -117,7 +119,8 @@
 }
 
 .number:hover,
-.point:hover {
+.point:hover,
+.percent:hover {
     width: 55px;
     height: 55px;
     border-color: #70777f;
@@ -148,11 +151,13 @@
 .equals:active,
 .clear:active,
 .point:active,
-#c:active {
+#c:active,
+.percent:active {
     margin-top: 5px;
 }
 
 .point:active,
-.number:active {
+.number:active,
+.percent:active {
     border-color: #878f98;
 }
