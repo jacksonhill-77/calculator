@@ -4,6 +4,8 @@ let displayDiv = document.querySelector('.display-text')
 let clear = document.querySelector('.clear')
 let equals = document.querySelector('.equals')
 let backspace = document.getElementById('c')
+let point = document.querySelector('.point')
+
 
 let number1 = ""
 let number2 = ""
@@ -16,6 +18,8 @@ let pressedEquals = false
 function roundNumber(num, dec) {
     return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
 }
+
+
 
 // When a number button is pressed, 
 for (n of numbers) {
@@ -97,6 +101,14 @@ backspace.addEventListener('click', () => {
     let currentDisplay = displayDiv.textContent
     displayDiv.textContent = currentDisplay.slice(0, -1);
 
+})
+
+point.addEventListener('click', () => {
+    let currentDisplay = displayDiv.textContent
+    if (currentDisplay.includes(".") === false) {
+        let newDisplay = currentDisplay + "."
+        displayDiv.textContent = newDisplay
+    }
 })
 
 // Define the basic calculating operators
