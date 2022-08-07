@@ -2,12 +2,6 @@
     background-color: #d6ccef;
 }
 
-.display-text {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 30px;
-    font-weight: bolder;
-}
-
 
 /* ENTIRE CALCULATOR DIV */
 
@@ -16,6 +10,9 @@
     width: 350px;
     height: 800px;
 }
+
+
+/* EACH HALF OF THE CALCULATOR DISPLAY */
 
 .display,
 .button-container {
@@ -32,6 +29,12 @@
     background-color: #F4AB41;
     border-radius: 25px 25px 0px 0px;
     padding: 15px;
+}
+
+.display-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
 }
 
 

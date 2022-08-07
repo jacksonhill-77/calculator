@@ -120,12 +120,12 @@ percent.addEventListener('click', () => {
 const add = function(...args) {
     const numbers = Array.prototype.slice.call(arguments)
     return numbers.reduce((total, number) => {
-        return total + number;
+        return (total + number).toPrecision(3);
     }, 0);
 }
 
 const subtract = function(a, b) {
-    return a - b
+    return (a - b).toPrecision(3);
 };
 
 const multiply = function(...args) {
@@ -134,27 +134,27 @@ const multiply = function(...args) {
         return prev.concat(curr)
     }, [])
     return flattened.reduce((total, number) => {
-        return total * number;
+        return (total * number).toPrecision(3);
     }, 1);
 };
 
 const divide = function(number1, number2) {
-    return number1 / number2
+    return (number1 / number2).toPrecision(3);
 };
 
 const operate = function(operator, number1, number2) {
     number1 = Number(number1)
     number2 = Number(number2)
     if (operator === "+") {
-        return (roundNumber(add(number1, number2), 10))
+        return (add(number1, number2))
     }
     if (operator === "-") {
-        return (roundNumber(subtract(number1, number2), 10))
+        return (subtract(number1, number2))
     }
     if (operator === "x") {
-        return (roundNumber(multiply(number1, number2), 10))
+        return (multiply(number1, number2))
     }
     if (operator === "÷") {
-        return (roundNumber(divide(number1, number2), 10))
+        return (divide(number1, number2))
     }
 }
